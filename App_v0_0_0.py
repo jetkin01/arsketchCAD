@@ -44,43 +44,43 @@ class HoverBehavior(object):
 
 
 
-class InertialPlane(Widget):
+# class InertialPlane(Widget):
 
-	def __init__(self, **kwargs):
-		super(InertialPlane, self).__init__(**kwargs)
-		self.prompt = Label(text="draw here")
-		self.valign = 'middle'
-		self.layout = AnchorLayout()
-		self.layout.add_widget(self.prompt)
+# 	def __init__(self, **kwargs):
+# 		super(InertialPlane, self).__init__(**kwargs)
+# 		self.prompt = Label(text="draw here")
+# 		self.valign = 'middle'
+# 		self.layout = AnchorLayout()
+# 		self.layout.add_widget(self.prompt)
 
-	def on_touch_down(self, touch):
-		touch.grab(self)
-		color = (random(), 1, 1)
-		self.startPoint = Point(self.canvas)
-		self.startPoint.x = touch.x
-		self.startPoint.y = touch.y
-		self.startPointColor = color
-		with self.canvas:
-			Color = color
-			self.startPoint.display()
-			touch.ud['line'] = Line(points=(touch.x, touch.y), width=1.05)
+# 	def on_touch_down(self, touch):
+# 		touch.grab(self)
+# 		color = (random(), 1, 1)
+# 		self.startPoint = Point(self.canvas)
+# 		self.startPoint.x = touch.x
+# 		self.startPoint.y = touch.y
+# 		self.startPointColor = color
+# 		with self.canvas:
+# 			Color = color
+# 			self.startPoint.display()
+# 			touch.ud['line'] = Line(points=(touch.x, touch.y), width=1.05)
 
-	def on_touch_move(self, touch):
-		if(touch.grab_current is self):
-			with self.canvas:
-				initial_points = touch.ud['line'].points[0:2]
-				touch.ud['line'].points.clear()
-				touch.ud['line'].points = [initial_points[0], initial_points[1], touch.x, touch.y]
+# 	def on_touch_move(self, touch):
+# 		if(touch.grab_current is self):
+# 			with self.canvas:
+# 				initial_points = touch.ud['line'].points[0:2]
+# 				touch.ud['line'].points.clear()
+# 				touch.ud['line'].points = [initial_points[0], initial_points[1], touch.x, touch.y]
 
-	def on_touch_up(self, touch):
-		if(touch.grab_current is self):
-			self.endPoint = Point(self.canvas)
-			self.endPoint.x = touch.x
-			self.endPoint.y = touch.y
-			self.endPoint.color = self.startPoint.color
-			with self.canvas:
-				Color = self.endPoint.color
-				self.endPoint.display()
+# 	def on_touch_up(self, touch):
+# 		if(touch.grab_current is self):
+# 			self.endPoint = Point(self.canvas)
+# 			self.endPoint.x = touch.x
+# 			self.endPoint.y = touch.y
+# 			self.endPoint.color = self.startPoint.color
+# 			with self.canvas:
+# 				Color = self.endPoint.color
+# 				self.endPoint.display()
 
 
 
@@ -92,6 +92,10 @@ class MyPaintApp(App):
 
 		self.plane = Plane()
 		parent.add_widget(self.plane)
+		self.prompt = Label(
+			text="click to draw", 
+			pos_hint = {'top':5, 'right':2})
+		parent.add_widget(self.prompt)
 
 		clearbtn = Button(text='Clear')
 		clearbtn.bind(on_press=self.clear_canvas)

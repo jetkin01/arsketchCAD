@@ -39,8 +39,6 @@ class Plane(ScatterLayout):
 	"""2D Plane Widget"""
 	def __init__(self, **kwargs):
 		super(Plane, self).__init__()
-		self.prompt = Label(text="click to draw", pos_hint = {'top':1, 'right':1})
-		self.add_widget(self.prompt)
 		self.points = []
 
 	def on_touch_down(self, touch):
